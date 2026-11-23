@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة الظل</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0b0d12;
+      color: #f3f4f6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .panel {
+      width: 100%;
+      max-width: 430px;
+      background: #141821;
+      border: 1px solid #262c3a;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 14px;
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: #0d1017;
+      padding: 4px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+    .tab {
+      text-align: center;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #9ca3af;
+    }
+    .tab.active {
+      background: #1d2332;
+      color: #ffffff;
+    }
+    .box {
+      background: #0f131b;
+      border: 1px solid #222938;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 4px;
+      border-bottom: 1px solid #1b212e;
+      font-size: 13px;
+    }
+    .row:last-child {
+      border-bottom: 0;
+    }
+    .label {
+      color: #9ca3af;
+    }
+    .value {
+      font-weight: 700;
+      color: #ffffff;
+      direction: ltr;
+    }
+    .copy-btn {
+      background: #262e40;
+      color: #ffffff;
+      border: 0;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    .sub-btn {
+      width: 100%;
+      background: #ffffff;
+      color: #0b0d12;
+      border: 0;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .hint {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="top-bar">
+      <span>لوحة الظل</span>
+      <span>الإنجليزية / العربية</span>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">الرئيسية</div>
+      <div class="tab">الميزات</div>
+      <div class="tab">إدارة</div>
+    </div>
+
+    <div class="box">
+      <div class="row">
+        <span class="label">الحالة</span>
+        <span class="value" style="color:#34d399;">نشط</span>
+      </div>
+      <div class="row">
+        <span class="label">مفتاح</span>
+        <span class="value">
+          <button class="copy-btn" onclick="copyKey()">نسخ</button>
+          <span id="keyText">SHDW-TEST-1234-5678</span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="label">المتبقي</span>
+        <span class="value">71 ساعة 59 دقيقة 8 ثوانٍ</span>
+      </div>
+      <div class="row">
+        <span class="label">جهاز</span>
+        <span class="value">لم يتم قفله بعد</span>
+      </div>
+    </div>
+
+    <button class="sub-btn" onclick="openV2Box()">إضافة اشتراك</button>
+    <div class="hint">يقوم بإنشاء ونسخ رابط اشتراكك لعملاء البروكسي.</div>
+  </div>
+
+  <script>
+    const SUB_URL = "https://shadow-panel-one.vercel.app/api/sub?key=SHDW-TEST-1234-5678";
+
+    function openV2Box() {
+      const v2boxLink = `v2box://install-sub?url=${encodeURIComponent(SUB_URL)}&name=${encodeURIComponent("لوحة الظل")}`;
+      window.location.href = v2boxLink;
+    }
+
+    function copyKey() {
+      const key = document.getElementById("keyText").textContent.trim();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(key);
+      }
+    }
+  </script>
+</body>
+</html>
